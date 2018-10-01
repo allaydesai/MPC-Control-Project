@@ -101,8 +101,8 @@ int main() {
             double shiftY = ptsy[i] - py;
 
             // Rotate to bring reference angle to 0
-            ptsx[i] = shiftX * cos(0-psi) - shiftY * sin(0-psi);
-            ptsy[i] = shiftX * sin(0-psi) + shiftY * cos(0-psi);
+            ptsx[i] = (shiftX * cos(0-psi) - shiftY * sin(0-psi));
+            ptsy[i] = (shiftX * sin(0-psi) + shiftY * cos(0-psi));
 
           }
 
@@ -112,10 +112,10 @@ int main() {
           double* ptrY = &ptsy[0];
 
           Eigen::Map<Eigen::VectorXd> ptsX_transform(ptrX, 6); //each state has 6 attributes
-          Eigen::Map<Eigen::VectorXd> ptsY_transofrm(ptrY, 6);
+          Eigen::Map<Eigen::VectorXd> ptsY_transform(ptrY, 6);
 
           // Calculate coefficients for third order polynomail
-          auto coeffs = polyfit(ptsX_transform, ptsY_transofrm, 3);
+          auto coeffs = polyfit(ptsX_transform, ptsY_transform, 3);
 
           // Calculate cross track error 
           double cte = polyeval(coeffs, 0); // we shifted x,y to 0
@@ -166,7 +166,7 @@ int main() {
           for(int i=2; i<vars.size(); i++)
           {
             // all even: X and odd: Y
-            if(i%2)
+            if(i%2 == 0)
             {
               mpc_x_vals.push_back(vars[i]);
             }
@@ -186,7 +186,7 @@ int main() {
           // NOTE: Remember to divide by deg2rad(25) before you send the steering value back.
           // Otherwise the values will be in between [-deg2rad(25), deg2rad(25] instead of [-1, 1].
           // commands to the car
-          msgJson["steering_angle"] = vars[0]/(deg2rad(25)*Lf);
+          msgJson["steering_angle"] = vars[0];///(deg2rad(25)*Lf);
           msgJson["throttle"] = vars[1];
 
           
