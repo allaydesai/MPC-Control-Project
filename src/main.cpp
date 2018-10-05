@@ -134,9 +134,23 @@ int main() {
           double steer_value = j[1]["steering_angle"];
           double throttle_value = j[1]["throttle"];
 
+          // Run simulator at const speed and steer, while varying other parameters
+          // Result: runs in a circle, adjust parameter until always the same circle
+          // Accounts for vehicle attribute such as length
+          double Lf = 2.67;
+
+          // Consider delay
+          double delay_t = 0.1;
+          double x_delay = v * delay_t;
+          double y_delay = 0; // since transformed
+          double psi_delay = -1 * v * steer_value / Lf * delay_t;
+          double v_delay = v + throttle_value * delay_t;
+          double cte_delay = cte + v * sin(epsi)* delay_t;
+          double epsi_delay = epsi - v * steer_value / Lf * delay_t;
+
           // Hence, the new state
           Eigen::VectorXd state(6);
-          state << 0, 0, 0, v, cte, epsi; //pos and angle transformed to 0
+          state << x_delay, y_delay, psi_delay, v_delay, cte_delay, epsi_delay; //pos and angle transformed to 0
 
           // Model predictive control
           // calculate how far it is from desired path
@@ -175,10 +189,7 @@ int main() {
               mpc_y_vals.push_back(vars[i]);
             }
           }
-          // Run simulator at const speed and steer, while varying other parameters
-          // Result: runs in a circle, adjust parameter until always the same circle
-          // Accounts for vehicle attribute such as length
-          double Lf = 2.67;
+          
 
           
 
