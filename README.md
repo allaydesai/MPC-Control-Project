@@ -76,6 +76,17 @@ The parameters chosen include a time_step of 0.1 sec and a N of 10 which results
 
 The time step of 1 sec was chosen based on experimentation it was found that larger time periods resulted in the car driving off the road. 
 
+| Parameter  | Value| Comment
+|------------|------|--------------------------------------------|
+| cte        | 2000 | Penalty for high cte error (deviation)     |
+| epsi       | 2000 | Penalty for high epsi error (orientation)  |
+| v_start    | 1    | No penalty for high velocity               |
+| delta      | 5    | Penalty for using actuators                |
+| a          | 5    | Penalty for using actuators                |
+| Diff_delta | 200  | Penalty for sudden changes in angle        |
+| Diff_a     | 10   | Penalty for sudden changes in throttle     |
+
+
 ## Dependencies
 
 * cmake >= 3.5
