@@ -70,6 +70,11 @@ The state vector is updated from time t to time t+1 with the following equations
 
 **Lf**: Distance between the center of mass and front axle.
 
+**Results**
+
+The parameters chosen include a time_step of 0.1 sec and a N of 10 which results in a timeframe from 1 sec. This means that the MPC controller plans 1 sec into the future at any given time. Choice of weights in the cost function was done based on importance. So critical parameters such as cte and epsi were given a larger weight value. 
+
+The time step of 1 sec was chosen based on experimentation it was found that larger time periods resulted in the car driving off the road. 
 
 ## Dependencies
 
