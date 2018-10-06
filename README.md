@@ -1,7 +1,75 @@
-# CarND-Controls-MPC
+# MPC Control Project
+
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
 Self-Driving Car Engineer Nanodegree Program
 
+Overview
+
 ---
+
+[//]: # (Image References)
+
+[video]: ./results/result_video.gif "Video showing loop around track"
+[model_eq]: ./results/model_eq.gif "Kinematic model equation"
+[video_high_kp]: ./results/High_Kp.gif "Video with high Kp"
+[Video_low_kd]: ./results/low_Kd.gif "Video with low Kd"
+[Video_high_kd]: ./results/high_kd_2.gif "Video with high Kd"
+
+**PROJECT DESCRIPTION**
+---
+In this project I implemented Model Predictive Control(MPC) to drive the car around the lake race track in a simulated envrionment. I calculated the cross-track error and accommodated for 100 millisecond latency of actuations command in addition to connection latency. Basic principle of MPC is to control a process while satisfying a set of constraints. It boils downs to become an optimization problem where goal is to follow a desired trajectory the vehicle must follow.
+
+![alt text][video]
+
+**Project Goals**
+
+The goals / steps of this project are the following:
+- Build a MPC controller in C++
+- Tune controller hyperparameters
+- Calculate cte and epsi error along with total cost
+- Compensate for latency
+- Vehicle succesfully drives a lap around the track without tires leaving the driveable portions
+
+The simulation is overlayed with two lines. The yellow is a polynomial fitted to waypoints and the green line represents the x and y coordinates of the MPC trajectory. This trajectory is the predicted path solved by the controller with a goal of keeping cost low. 
+
+The vehicle model is built into the MPC controller and the state of the vehicle at any given time can be depicted as follows:
+
+- **x**: Position X
+- **y**: Position Y
+- **psi**: Orientation
+- **v**: Current Velocity
+- **cte**: Cross Track Error (Deviation from desired path)
+- **epsi**: Orientation Error
+
+Inputs from the simulator:
+
+- **ptsx**: A list of x positions in map coordinate system of the trajectory
+- **ptsy**: A list of y positions in map coordinate system of the trajectory
+- **x**: The current x position of the vehicle in map coordinate system
+- **y**: The current y position of the vehicle in map coordinate system
+- **psi**: The vehicle orientation in radians, with respect to the global map
+- **speed**: The current speed in mph
+- **steering_angle**: The steering angle in radians
+- **throttle**: The current throttle value (in the range [1, -1]) 
+
+Outputs to the simulator:
+
+- **steering_angle**: Next steering angle value for actuators [1, -1]
+- **throttle**: The throttle value to submit next (in the range [1, -1])
+- **next_x**: A list of x positions for the reference trajectory in vehicle coordinate system
+- **next_y**: A list of y positions for the reference trajectory in vehicle coordinate system
+- **mpc_x**: A list of x positions computed by the MPC for the minimized cost trajectory
+- **mpc_y**: A list of y positions computed by the MPC for the minimized cost trajectory
+
+Vehicle Motion Model:
+
+The state vector is updated from time t to time t+1 with the following equations:
+
+![alt text][model_eq]
+
+**Lf**: Distance between the center of mass and front axle.
+
 
 ## Dependencies
 
