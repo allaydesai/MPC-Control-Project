@@ -10,7 +10,7 @@ Overview
 
 [//]: # (Image References)
 
-[video]: ./results/result_video.gif "Video showing loop around track"
+[video]: ./MPC_output.gif "Video showing loop around track"
 [model_eq]: ./results/model_eq.gif "Kinematic model equation"
 [video_high_kp]: ./results/High_Kp.gif "Video with high Kp"
 [Video_low_kd]: ./results/low_Kd.gif "Video with low Kd"
