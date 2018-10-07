@@ -11,7 +11,7 @@ Overview
 [//]: # (Image References)
 
 [video]: ./MPC_output.gif "Video showing loop around track"
-[model_eq]: ./results/model_eq.gif "Kinematic model equation"
+[model_eq]: ./model_eq.gif "Kinematic model equation"
 [video_high_kp]: ./results/High_Kp.gif "Video with high Kp"
 [Video_low_kd]: ./results/low_Kd.gif "Video with low Kd"
 [Video_high_kd]: ./results/high_kd_2.gif "Video with high Kd"
@@ -76,7 +76,9 @@ The parameters chosen include a time_step of 0.1 sec and a N of 10 which results
 
 The time step of 1 sec was chosen based on experimentation it was found that larger time periods resulted in the car driving off the road. 
 
-| Parameter  | Value| Comment
+Weights for cost function:
+
+| Parameter  | Value| Comment                                    |
 |------------|------|--------------------------------------------|
 | cte        | 2000 | Penalty for high cte error (deviation)     |
 | epsi       | 2000 | Penalty for high epsi error (orientation)  |
